@@ -236,22 +236,30 @@ class ReactApp extends React.Component {
     return (
       <div id="wrapper">
         <h1>25 + 5 Clock</h1>
-
-        <div id="break-label"> <h2>Break Length</h2> </div>
-        <button id="break-increment" onClick={() => { this.handleClick("+Break") }}>+ Break Time</button>
-        <button id="break-decrement" onClick={() => { this.handleClick("-Break") }}>- Break Time</button>
-        <div id="break-length"> <h3>{this.state.breakLength}</h3> </div>
-
-        <div id="session-label"> <h2>Session Length</h2> </div>
-        <button id="session-increment" onClick={() => { this.handleClick("+Time") }}>+ Time</button>
-        <button id="session-decrement" onClick={() => { this.handleClick("-Time") }}>- Time </button>
-        <div id="session-length"> <h3>{this.state.sessionLength}</h3> </div>
-
-        <div id="timer-label"> <h2>Session</h2> </div>
-        <div id="time-left"> <h1>{this.state.timer}</h1> </div>
-
-        <button id="start_stop" onClick={() => { this.handleClick("start-stop") }}> START / STOP</button>
-        <button id="reset" onClick={() => { this.handleClick("reset") }}>Reset</button>
+        <div className="settings-display">
+          <div id="break-label"> <h2>Break Length</h2> </div>
+          <div id="break-length"> <h2>{this.state.breakLength}</h2> </div>
+        </div>
+        <div className="button-wrapper">
+          <button id="break-decrement" onClick={() => { this.handleClick("-Break") }}>-</button>
+          <button id="break-increment" onClick={() => { this.handleClick("+Break") }}>+</button>
+        </div>
+        <div className="settings-display">
+          <div id="session-label"> <h2>Session Length</h2> </div>
+          <div id="session-length"> <h2>{this.state.sessionLength}</h2> </div>
+        </div>
+        <div className="button-wrapper">
+          <button id="session-decrement" onClick={() => { this.handleClick("-Time") }}>-</button>
+          <button id="session-increment" onClick={() => { this.handleClick("+Time") }}>+</button>
+        </div>
+        <div className="settings-timer">
+          <div id="timer-label"> <h2>Session</h2> </div>
+          <div id="time-left"> <h1>{this.state.timer}</h1> </div>
+        </div>
+        <div className="button-wrapper">
+          <button id="start_stop" onClick={() => { this.handleClick("start-stop") }}>Play/Pause</button>
+          <button id="reset" onClick={() => { this.handleClick("reset") }}>Reset</button>
+        </div>
         <audio id="beep" preload="auto" ref={(audio) => { this.alarm = audio; }} src="./sounds/alarm.mp3" />
       </div>
     );
