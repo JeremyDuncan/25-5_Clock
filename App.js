@@ -18,6 +18,7 @@ class ReactApp extends React.Component {
 
   // functions
   //==================== Start & Stop Functions ==============================>
+
   changeStopTime = () => {
     if(this.state.stoptime == true){
       this.setState({stoptime: this.state.stoptime = false});
@@ -44,6 +45,7 @@ class ReactApp extends React.Component {
 
 
   // ========== Minutes & Seconds functions ==================================>
+
   countDown = () => { 
     this.setState({timer: this.state.timer = this.state.min + ':' + this.state.sec});
   }
@@ -75,7 +77,9 @@ class ReactApp extends React.Component {
     this.setState({sec: this.state.sec = "0" + 0});
   }
 
+
   //======================= Timing Function ===================================>
+
   timerCycle = () => {
     if (this.state.stoptime == false) {
       this.parseSec();
@@ -108,7 +112,9 @@ class ReactApp extends React.Component {
     }
   }
   
+
   //=====================Break & Session Functions ============================>
+
   // Adds 1 minute to sessionLength state
   addTime = () => {       
     if(this.state.sessionLength < 60){
@@ -123,19 +129,23 @@ class ReactApp extends React.Component {
   }
   // Sets initial timer to sessionLength state
   setTimer = () => {  
-    this.setState({time: this.state.timer = this.state.sessionLength + ":00"})
+    this.setState({time: this.state.timer = this.state.sessionLength + ":00"});
   }
   // Sets min state to sessionLength
   setMinutes = () => { 
-    this.setState({min: this.state.min = this.state.sessionLength})
+    this.setState({min: this.state.min = this.state.sessionLength});
   }
   // Add 1 minute to breakLength
   addBreak = () => {
-    this.setState({breakLength: this.state.breakLength = this.state.breakLength + 1})
+    if(this.state.breakLength < 60){
+      this.setState({breakLength: this.state.breakLength = this.state.breakLength + 1});
+    }
   }
   // Subtract 1 minute from breakLength
   subtractBreak = () => {
-    this.setState({breakLength: this.state.breakLength = this.state.breakLength - 1})
+    if(this.state.breakLength > 1){
+      this.setState({breakLength: this.state.breakLength = this.state.breakLength - 1});
+    }
   }
   //ADD FUNCTIONALITY TO THIS
   setBreakTimer = () => { 
@@ -144,6 +154,9 @@ class ReactApp extends React.Component {
  
 
   //================= handleClick() Function ==================================>
+  // This one function handles every click from user by using a switch
+  // depending on button pressed, it calls the appropriate functions
+
   handleClick = (button) => {
     switch (button) {
       case 'start-stop':
@@ -184,6 +197,9 @@ class ReactApp extends React.Component {
        alert("WIERD BUG!!");
     }
   }
+
+
+// ======================== RENDER HTML Section ===============================>
 
   render() {
     // Console logs for troubleshooting and debugging
