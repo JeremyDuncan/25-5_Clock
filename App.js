@@ -169,16 +169,10 @@ class ReactApp extends React.Component {
         <div id="session-length"> {this.state.sessionLength} </div>
        
         <div id="timer-label"> Session </div>
-        {/*// User Story #8: I can see an element with corresponding id="time-left". NOTE: Paused or running, the value in this field should always be displayed in mm:ss format (i.e. 25:00).*/}
         <div id="time-left"> {this.state.timer} </div>
 
         <button id="start_stop" onClick={() => { this.handleClick("start-stop") }}> START / STOP</button> 
         <button id="reset" onClick={() => { this.handleClick("reset") }}>Reset</button>
-
- {/* // User Story #11: When I click the element with the id of reset, any running timer should be stopped, the value within id="break-length" should return to 5, the value within id="session-length" should return to 25, and the element with id="time-left" should reset to its default state. */}
-
-
-
 
       </div>
     );
