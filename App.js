@@ -53,8 +53,6 @@ class ReactApp extends React.Component {
   takeABreak = () => {
     this.setState({timeForBreak: this.state.timeForBreak = true}); // switches break state to true
   }
-
-  // ADD FUNCTIONALITY <===============
   startBreak = () => { 
     this.takeABreak();
     this.setBreakTimer(); 
