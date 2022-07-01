@@ -156,10 +156,6 @@ class ReactApp extends React.Component {
         }
         break;
 
-      case 'stop':
-        alert("STOP") //ADD FUNCTIONALITY
-        break;
-
       case 'reset':
         this.resetTimer();
         break;
