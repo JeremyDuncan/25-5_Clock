@@ -7,11 +7,11 @@ class ReactApp extends React.Component {
     super(props)
     this.state = {
       breakLength: 5,
-      sessionLength: 25,
-      timer:"25:00",
+      sessionLength: 25,  
+      timer:"25:00",      // Timer Display
       stoptime: true, 
-      min: 1, //change to 25 when finished
-      sec: "0"+0,
+      min: 25,            // Minutes
+      sec: "0"+0,         // Seconds
       timeForBreak: false
     }
  
@@ -73,34 +73,34 @@ class ReactApp extends React.Component {
 
   // ========== Minutes & Seconds functions ==================================>
 
-  countDown = () => { 
+  countDown = () => {     // updates the timer display
     this.setState({timer: this.state.timer = this.state.min + ':' + this.state.sec});
   }
-  reduceSec = () => { 
+  reduceSec = () => {     // reduces Seconds state by 1 
     this.setState({sec: this.state.sec = this.state.sec - 1});
   }
-  reduceMin = () => { 
+  reduceMin = () => {     // reduces Minutes state by 1
     this.setState({min: this.state.min = this.state.min - 1});
   }
-  resetSec = () => { 
+  resetSec = () => {      // moves Seconds state to 59 (to count down to 0 again)
     this.setState({sec: this.state.sec = 59});
   }
-  addZeroToSec = () => { 
+  addZeroToSec = () => {  // Adds 0 in front of Seconds ( 00, 01, 02, 03..)
     this.setState({sec: this.state.sec = "0" + this.state.sec});
   }
-  addZeroToMin = () => { 
+  addZeroToMin = () => {  // Adds 0 in front of Minutes ( 00, 01, 02, 03..)
     this.setState({min: this.state.min = "0" + this.state.min});
   }
-  parseSec = () => { 
+  parseSec = () => {      // turns string number from Seconds state into Integer ( "01" == 1, etc)
     this.setState({sec: this.state.sec = parseInt(this.state.sec)});
   }
-  parseMin = () => { 
+  parseMin = () => {      // turns string number from Minutes state into Integer ( "01" == 1, etc)
     this.setState({min: this.state.min = parseInt(this.state.min)});
   }
-  resetMinutes = () => {
+  resetMinutes = () => {  // Turns Minutes state into value set by sessionLength state
     this.setState({min: this.state.min = this.state.sessionLength});
   }
-  resetSeconds = () => {
+  resetSeconds = () => { // Turns Seconds state into value of "00"
     this.setState({sec: this.state.sec = "0" + 0});
   }
 
@@ -141,7 +141,7 @@ class ReactApp extends React.Component {
     }
       
     this.countDown();                           // Updates Timer state
-    setTimeout(() => this.timerCycle(), 1);  // Repeats function every second
+    setTimeout(() => this.timerCycle(), 1000);  // Repeats function every second
     }
   }
   
