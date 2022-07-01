@@ -126,9 +126,9 @@ class ReactApp extends React.Component {
     if ( this.state.sec == 0 && this.state.min == 0) { 
       this.alarm.play(); 
       if(this.state.timeForBreak === false){ // changes timer if minutes and seconds equal zero
-        this.startBreak();      // ADD FUNCTIONALITY Later<===============
+        this.startBreak();      // <== ADD FUNCTIONALITY Later<===============
       } else {
-        this.startWork(); // ADD FUNCTIONALITY Later<===============
+        this.startWork();       // <== ADD FUNCTIONALITY Later<===============
       }
     }
     if (this.state.sec < 10 || this.state.sec == 0) {   // make sure that sec format is 00, 01, 02...
@@ -218,12 +218,10 @@ class ReactApp extends React.Component {
 
       case '+Break':
         this.addBreak(); 
-        //ADD FUNCTIONALITY<=========
         break;
 
       case "-Break":
         this.subtractBreak();
-        //ADD FUNCTIONALITY<==========
         break;
 
       default:
