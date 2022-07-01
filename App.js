@@ -120,7 +120,6 @@ class ReactApp extends React.Component {
         }
       }
 
-      // ADD FUNCTIONALITY <===============
       if (this.state.sec == 0 && this.state.min == 0) {
         this.alarm.play();
         if (this.state.timeForBreak === false) { // changes timer if minutes and seconds equal zero
