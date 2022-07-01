@@ -8,9 +8,9 @@ class ReactApp extends React.Component {
     this.state = {
       breakLength: 5,
       sessionLength: 25,
-      timer: "25:00",      // Timer Display
+      timer: "25:00",       // Timer Display
       stoptime: true,
-      min: 25,            // Minutes
+      min: 25,              // Minutes
       sec: "0" + 0,         // Seconds
       timeForBreak: false
     }
