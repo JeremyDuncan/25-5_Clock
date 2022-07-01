@@ -12,9 +12,21 @@ class ReactApp extends React.Component {
       stoptime: true,
       min: 25,              // Minutes
       sec: "0" + 0,         // Seconds
-      timeForBreak: false
+      timeForBreak: false,
+      timerName: "Session Time Remaining"
     }
   }
+
+//====================== Timer Name Function ==================================>
+
+  changeTimerName = () => {
+    if (this.state.timerName == "Session Time Remaining"){
+      this.setState({timerName: this.state.timerName = "Break Time Remaining"});
+    } else {
+      this.setState({timerName: this.state.timerName = "Session Time Remaining"});
+    }
+  }
+
 
   //==================== Start & Stop Functions ===============================>
 
@@ -123,8 +135,10 @@ class ReactApp extends React.Component {
       if (this.state.sec == 0 && this.state.min == 0) {
         this.alarm.play();
         if (this.state.timeForBreak === false) { // changes timer if minutes and seconds equal zero
+          this.changeTimerName();
           this.startBreak();      // <== ADD FUNCTIONALITY Later<===============
         } else {
+          this.changeTimerName();
           this.startWork();       // <== ADD FUNCTIONALITY Later<===============
         }
       }
@@ -140,7 +154,7 @@ class ReactApp extends React.Component {
     }
   }
 
-
+  
   //=====================Break & Session Button Functions =====================>
 
   // Adds 1 minute to sessionLength state
@@ -253,7 +267,7 @@ class ReactApp extends React.Component {
           <button id="session-increment" onClick={() => { this.handleClick("+Time") }}>+</button>
         </div>
         <div className="settings-timer">
-          <div id="timer-label"> <h2>Session</h2> </div>
+          <div id="timer-label"> <h2>{this.state.timerName}</h2> </div>
           <div id="time-left"> <h1>{this.state.timer}</h1> </div>
         </div>
         <div className="button-wrapper">
