@@ -66,14 +66,18 @@ class ReactApp extends React.Component {
   addZeroToMin = () => { 
     this.setState({min: this.state.min = "0" + this.state.min})
   }
-
-
+  parseSec = () => { 
+    this.setState({sec: this.state.sec = parseInt(this.state.sec)})
+  }
+  parseMin = () => { 
+    this.setState({min: this.state.min = parseInt(this.state.min)})
+  }
   //======================= Timing Function ===================================>
 
   timerCycle = () => {
     if (this.state.stoptime == false) {
-      // sec = parseInt(sec);
-      // min = parseInt(min);
+      this.parseSec();
+      this.parseMin();
       
     if(this.state.sec > 0) {      // If seconds greater than zero
       this.reduceSec();           // reduce second by 1
