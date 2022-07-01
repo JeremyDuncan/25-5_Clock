@@ -13,7 +13,7 @@ class ReactApp extends React.Component {
       timer:"25:00",
       stoptime: true, 
       min: 25,
-      sec: 0
+      sec: "0"+0
     }
  
   }
@@ -39,7 +39,9 @@ class ReactApp extends React.Component {
     }
   }
   resetTimer = () => {
-    this.setState({timer: timer = '25:00' });
+    this.resetMinutes();
+    this.resetSeconds();
+    this.setState({timer: this.state.timer = this.state.min + ":" + this.state.sec });
   }
 
 
@@ -48,28 +50,34 @@ class ReactApp extends React.Component {
     this.setState({timer: this.state.timer = this.state.min + ':' + this.state.sec});
   }
   reduceSec = () => { 
-    this.setState({sec: this.state.sec = this.state.sec - 1})
+    this.setState({sec: this.state.sec = this.state.sec - 1});
   }
   reduceMin = () => { 
-    this.setState({min: this.state.min = this.state.min - 1})
+    this.setState({min: this.state.min = this.state.min - 1});
   }
   resetSec = () => { 
-    this.setState({sec: this.state.sec = 60})
+    this.setState({sec: this.state.sec = 59});
   }
   addZeroToSec = () => { 
-    this.setState({sec: this.state.sec = "0" + this.state.sec})
+    this.setState({sec: this.state.sec = "0" + this.state.sec});
   }
   addZeroToMin = () => { 
-    this.setState({min: this.state.min = "0" + this.state.min})
+    this.setState({min: this.state.min = "0" + this.state.min});
   }
   parseSec = () => { 
-    this.setState({sec: this.state.sec = parseInt(this.state.sec)})
+    this.setState({sec: this.state.sec = parseInt(this.state.sec)});
   }
   parseMin = () => { 
-    this.setState({min: this.state.min = parseInt(this.state.min)})
+    this.setState({min: this.state.min = parseInt(this.state.min)});
   }
-  //======================= Timing Function ===================================>
+  resetMinutes = () => {
+    this.setState({min: this.state.min = 25});
+  }
+  resetSeconds = () => {
+    this.setState({sec: this.state.sec = "0" + 0});
+  }
 
+  //======================= Timing Function ===================================>
   timerCycle = () => {
     if (this.state.stoptime == false) {
       this.parseSec();
@@ -81,7 +89,7 @@ class ReactApp extends React.Component {
       this.resetSec();            // reset seconds back to 60
     }
 
-    if (this.state.sec == 60) {   // if seconds equal 60
+    if (this.state.sec == 59) {   // if seconds equal 60
       if(this.state.min > 0){                             
         this.reduceMin();         // reduce minutes by 1
       }         
@@ -91,25 +99,57 @@ class ReactApp extends React.Component {
       this,this.stopTimer();
     }
       
-    // if (this.state.sec < 10 || this.state.sec == 0) { //make sure that format is 00, 01, 02...
-    //   this.addZeroToSec();
-    // }
-    // if (this.state.min < 10 || this.state.min == 0) {
-    //   this.addZeroToMin();
-    // }
+    if (this.state.sec < 10 || this.state.sec == 0) { //make sure that format is 00, 01, 02...
+      this.addZeroToSec();
+    }
+    if (this.state.min < 10 || this.state.min == 0) {
+      this.addZeroToMin();
+    }
       
-      this.countDown();
+    this.countDown();
       //setTimeout(() => console.log('Initial timeout!'), 1000);
-      setTimeout(() => this.timerCycle(), 1000);
+    setTimeout(() => this.timerCycle(), 1000);
     }
   }
   
   //================= handleClick() Function ==================================>
   handleClick = (button) => {
-    if(button == "start"){
-      this.startTimer();
-    }
+    switch (button) {
+      case 'start-stop':
+        if(this.state.stoptime ==  true) {
+          this.startTimer();
+        } else {
+          this.stopTimer();
+        }
+        break;
 
+      case 'stop':
+        alert("STOP") //ADD FUNCTIONALITY
+        break;
+
+      case 'reset':
+        this.resetTimer();
+        break;
+
+      case '+Time':
+        alert("Add Time") //ADD FUNCTIONALITY
+        break;
+
+      case "-Time":
+        alert("Subtract Time") //ADD FUNCTIONALITY
+        break;
+
+      case '+Break':
+        alert("Add Break") //ADD FUNCTIONALITY
+        break;
+
+      case "-Break":
+        alert("Subtract Break") //ADD FUNCTIONALITY
+        break;
+
+      default:
+       alert("WIERD BUG!!");
+    }
   }
 
   render() {
@@ -121,11 +161,11 @@ class ReactApp extends React.Component {
         <h1>25 + 5 Clock</h1>
         <div id="break-label"> Break Length </div>
         <div id="session-label"> Session Length </div>
-        <button id="break-decrement" onClick={() => { this.handleClick() }}></button>
-        <button id="session-decrement" onClick={() => { this.handleClick() }}></button>
+        <button id="break-decrement" onClick={() => { this.handleClick("-Break") }}>- Break Time</button> 
+        <button id="session-decrement" onClick={() => { this.handleClick("-Time") }}>- Time </button>
         
-        <button id="break-increment" onClick={() => { this.handleClick() }}></button>
-        <button id="session-increment" onClick={() => { this.handleClick() }}></button>
+        <button id="break-increment" onClick={() => { this.handleClick("+Break") }}>+ Break Time</button>
+        <button id="session-increment" onClick={() => { this.handleClick("+Time") }}>+ Time</button>
         
         <div id="break-length"> {this.state.breakLength} </div>
         <div id="session-length"> {this.state.sessionLength} </div>
@@ -134,8 +174,8 @@ class ReactApp extends React.Component {
         {/*// User Story #8: I can see an element with corresponding id="time-left". NOTE: Paused or running, the value in this field should always be displayed in mm:ss format (i.e. 25:00).*/}
         <div id="time-left"> {this.state.timer} </div>
 
-        <button id="start_stop" onClick={() => { this.handleClick("start") }}> START</button> 
-        <button id="reset" onClick={() => { this.handleClick() }}></button>
+        <button id="start_stop" onClick={() => { this.handleClick("start-stop") }}> START / STOP</button> 
+        <button id="reset" onClick={() => { this.handleClick("reset") }}>Reset</button>
 
  {/* // User Story #11: When I click the element with the id of reset, any running timer should be stopped, the value within id="break-length" should return to 5, the value within id="session-length" should return to 25, and the element with id="time-left" should reset to its default state. */}
 
