@@ -53,7 +53,7 @@ class ReactApp extends React.Component {
   takeABreak = () => {
     this.setState({timeForBreak: this.state.timeForBreak = true}); // switches break state to true
   }
-  startBreak = () => { 
+  startBreak = () => {  // Starts timer for break Session Minutes once break starts
     this.takeABreak();
     this.setBreakTimer(); 
   }
@@ -64,7 +64,7 @@ class ReactApp extends React.Component {
     this.setState({timeForBreak: this.state.timeForBreak = false}); // switches break state to false
   }
 
-  startWork = () => {
+  startWork = () => { // Starts timer for work Session Minutes once break is over
     this.goToWork();
     this.setMinutes();
   }
