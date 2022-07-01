@@ -95,20 +95,18 @@ class ReactApp extends React.Component {
       }         
     }
 
-    if ( this.state.sec == 0 && this.state.min == 0) { 
+    if ( this.state.sec == 0 && this.state.min == 0) {  // Stops timer if minutes and seconds equal zero
       this,this.stopTimer();
     }
-      
-    if (this.state.sec < 10 || this.state.sec == 0) { //make sure that format is 00, 01, 02...
+    if (this.state.sec < 10 || this.state.sec == 0) {   // make sure that sec format is 00, 01, 02...
       this.addZeroToSec();
     }
-    if (this.state.min < 10 || this.state.min == 0) {
+    if (this.state.min < 10 || this.state.min == 0) {   // make sure that min format is 00, 01, 02...
       this.addZeroToMin();
     }
       
-    this.countDown();
-      //setTimeout(() => console.log('Initial timeout!'), 1000);
-    setTimeout(() => this.timerCycle(), 1000);
+    this.countDown();                           // Updates Timer state
+    setTimeout(() => this.timerCycle(), 1000);  // Repeats function every second
     }
   }
   
