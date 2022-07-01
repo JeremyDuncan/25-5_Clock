@@ -19,7 +19,7 @@ class ReactApp extends React.Component {
   }
 
   // functions
-  //==================== Timer Functions ==============================>
+  //==================== Start & Stop Functions ==============================>
   changeStopTime = () => {
     if(this.state.stoptime == true){
       alert("HERE")
@@ -28,7 +28,6 @@ class ReactApp extends React.Component {
       this.setState({stoptime: this.state.stoptime = true});
     }
   }
-
   startTimer = () => {
     if (this.state.stoptime == true) {
           
@@ -43,11 +42,12 @@ class ReactApp extends React.Component {
       this.changeStopTime();
     }
   }
-  
+  resetTimer = () => {
+    this.setState({timer: timer = '25:00' });
+  }
 
 
-  // Timer Function countdowns minutes and seconds ============================>
-
+  // ========== Minutes & Seconds functions ==================================>
   countDown = () => { 
     this.setState({timer: this.state.timer = this.state.min + ':' + this.state.sec});
   }
@@ -66,7 +66,9 @@ class ReactApp extends React.Component {
   addZeroToMin = () => { 
     this.setState({min: this.state.min = "0" + this.state.min})
   }
-  //=========================================================================>
+
+
+  //======================= Timing Function ===================================>
 
   timerCycle = () => {
     if (this.state.stoptime == false) {
@@ -102,16 +104,12 @@ class ReactApp extends React.Component {
     }
   }
   
-  resetTimer = () => {
-      this.setState({timer: timer = '25:00' });
-  }
-
-  //================= Main Function =====================================>
+  //================= handleClick() Function ==================================>
   handleClick = (button) => {
     if(button == "start"){
       this.startTimer();
     }
-    // DO something
+
   }
 
   render() {
