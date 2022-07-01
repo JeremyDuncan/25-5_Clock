@@ -10,8 +10,9 @@ class ReactApp extends React.Component {
       sessionLength: 25,
       timer:"25:00",
       stoptime: true, 
-      min: 25,
-      sec: "0"+0
+      min: 1,
+      sec: "0"+0,
+      timeForBreak: false
     }
  
   }
@@ -27,7 +28,7 @@ class ReactApp extends React.Component {
     }
   }
   startTimer = () => {
-    if (this.state.stoptime == true) {
+    if(this.state.stoptime == true) {
       this.changeStopTime();
       this.timerCycle();
     }
@@ -43,6 +44,32 @@ class ReactApp extends React.Component {
     this.setState({timer: this.state.timer = this.state.min + ":" + this.state.sec });
   }
 
+  //=================== Start BREAK Timer Functions ===========================>
+  
+  setBreakTimer = () => { 
+    this.setState({min: this.state.min = this.state.breakLength}); // Changes minutes to break minutes
+  }
+
+  takeABreak = () => {
+    this.setState({timeForBreak: this.state.timeForBreak = true}); // switches break state to true
+  }
+
+  // ADD FUNCTIONALITY <===============
+  startBreak = () => { 
+    this.takeABreak();
+    this.setBreakTimer(); 
+  }
+
+
+  //=================== Start WORK Timer Functions ===========================>
+  goToWork = () => {
+    this.setState({timeForBreak: this.state.timeForBreak = false}); // switches break state to false
+  }
+
+  startWork = () => {
+    this.goToWork();
+    this.setMinutes();
+  }
 
   // ========== Minutes & Seconds functions ==================================>
 
@@ -97,8 +124,14 @@ class ReactApp extends React.Component {
       }         
     }
 
-    if ( this.state.sec == 0 && this.state.min == 0) {  // Stops timer if minutes and seconds equal zero
-      this,this.stopTimer();
+    // ADD FUNCTIONALITY <===============
+    if ( this.state.sec == 0 && this.state.min == 0) {  // changes timer if minutes and seconds equal zero
+
+      if(this.state.timeForBreak === false){
+        this.startBreak();      // ADD FUNCTIONALITY <===============
+      } else {
+        this.startWork(); // ADD FUNCTIONALITY <===============
+      }
     }
     if (this.state.sec < 10 || this.state.sec == 0) {   // make sure that sec format is 00, 01, 02...
       this.addZeroToSec();
@@ -108,12 +141,12 @@ class ReactApp extends React.Component {
     }
       
     this.countDown();                           // Updates Timer state
-    setTimeout(() => this.timerCycle(), 1000);  // Repeats function every second
+    setTimeout(() => this.timerCycle(), 1);  // Repeats function every second
     }
   }
   
 
-  //=====================Break & Session Functions ============================>
+  //=====================Break & Session Button Functions =====================>
 
   // Adds 1 minute to sessionLength state
   addTime = () => {       
@@ -147,11 +180,7 @@ class ReactApp extends React.Component {
       this.setState({breakLength: this.state.breakLength = this.state.breakLength - 1});
     }
   }
-  //ADD FUNCTIONALITY TO THIS
-  setBreakTimer = () => { 
-    // do this ===>
-  }
- 
+
 
   //================= handleClick() Function ==================================>
   // This one function handles every click from user by using a switch
@@ -243,34 +272,6 @@ root.render(
   </div>
 );
 
-
-
-
-
-
-
-
-
-
-// User Story #12: When I click the element with the id of break-decrement, the value within id="break-length" decrements by a value of 1, and I can see the updated value.
-
-// User Story #13: When I click the element with the id of break-increment, the value within id="break-length" increments by a value of 1, and I can see the updated value.
-
-// User Story #14: When I click the element with the id of session-decrement, the value within id="session-length" decrements by a value of 1, and I can see the updated value.
-
-// User Story #15: When I click the element with the id of session-increment, the value within id="session-length" increments by a value of 1, and I can see the updated value.
-
-// User Story #16: I should not be able to set a session or break length to <= 0.
-
-// User Story #17: I should not be able to set a session or break length to > 60.
-
-// User Story #18: When I first click the element with id="start_stop", the timer should begin running from the value currently displayed in id="session-length", even if the value has been incremented or decremented from the original value of 25.
-
-// User Story #19: If the timer is running, the element with the id of time-left should display the remaining time in mm:ss format (decrementing by a value of 1 and updating the display every 1000ms).
-
-// User Story #20: If the timer is running and I click the element with id="start_stop", the countdown should pause.
-
-// User Story #21: If the timer is paused and I click the element with id="start_stop", the countdown should resume running from the point at which it was paused.
 
 // User Story #22: When a session countdown reaches zero (NOTE: timer MUST reach 00:00), and a new countdown begins, the element with the id of timer-label should display a string indicating a break has begun.
 
