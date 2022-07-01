@@ -22,7 +22,6 @@ class ReactApp extends React.Component {
   //==================== Start & Stop Functions ==============================>
   changeStopTime = () => {
     if(this.state.stoptime == true){
-      alert("HERE")
       this.setState({stoptime: this.state.stoptime = false});
     } else {
       this.setState({stoptime: this.state.stoptime = true});
@@ -30,12 +29,9 @@ class ReactApp extends React.Component {
   }
   startTimer = () => {
     if (this.state.stoptime == true) {
-          
-          this.changeStopTime();
-          alert(this.state.stoptime)
-          console.log(this.state.stoptime)
-          this.timerCycle();
-      }
+      this.changeStopTime();
+      this.timerCycle();
+    }
   }
   stopTimer = () => {
     if (this.state.stoptime == false) {
