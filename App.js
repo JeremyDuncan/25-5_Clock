@@ -14,11 +14,9 @@ class ReactApp extends React.Component {
       sec: "0" + 0,         // Seconds
       timeForBreak: false
     }
-
   }
 
-  // functions
-  //==================== Start & Stop Functions ==============================>
+  //==================== Start & Stop Functions ===============================>
 
   changeStopTime = () => {
     if (this.state.stoptime == true) {
@@ -59,7 +57,7 @@ class ReactApp extends React.Component {
   }
 
 
-  //=================== Start WORK Timer Functions ===========================>
+  //=================== Start WORK Timer Functions ============================>
   goToWork = () => {
     this.setState({ timeForBreak: this.state.timeForBreak = false }); // switches break state to false
   }
@@ -69,7 +67,7 @@ class ReactApp extends React.Component {
     this.setMinutes();
   }
 
-  // ========== Minutes & Seconds functions ==================================>
+  //=========== Minutes & Seconds functions ===================================>
 
   countDown = () => {     // updates the timer display
     this.setState({ timer: this.state.timer = this.state.min + ':' + this.state.sec });
@@ -229,8 +227,8 @@ class ReactApp extends React.Component {
     }
   }
 
-
-  // ======================== RENDER HTML Section ===============================>
+  
+  //======================== RENDER HTML Section ==============================>
 
   render() {
     // Console logs for troubleshooting and debugging
