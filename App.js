@@ -10,7 +10,7 @@ class ReactApp extends React.Component {
       sessionLength: 25,
       timer:"25:00",
       stoptime: true, 
-      min: 1,
+      min: 1, //change to 25 when finished
       sec: "0"+0,
       timeForBreak: false
     }
@@ -125,9 +125,9 @@ class ReactApp extends React.Component {
     }
 
     // ADD FUNCTIONALITY <===============
-    if ( this.state.sec == 0 && this.state.min == 0) {  // changes timer if minutes and seconds equal zero
-
-      if(this.state.timeForBreak === false){
+    if ( this.state.sec == 0 && this.state.min == 0) { 
+      this.alarm.play(); 
+      if(this.state.timeForBreak === false){ // changes timer if minutes and seconds equal zero
         this.startBreak();      // ADD FUNCTIONALITY <===============
       } else {
         this.startWork(); // ADD FUNCTIONALITY <===============
@@ -199,6 +199,7 @@ class ReactApp extends React.Component {
       case 'reset':
         this.resetTimer();
         this.changeStopTime();
+        this.alarm.pause();
         break;
 
       case '+Time':
@@ -253,19 +254,12 @@ class ReactApp extends React.Component {
         <button id="session-decrement" onClick={() => { this.handleClick("-Time") }}>- Time </button>
         <div id="session-length"> <h3>{this.state.sessionLength}</h3> </div>
 
-       
-        
-        
-        
-        
-        
-       
         <div id="timer-label"> <h2>Session</h2> </div>
         <div id="time-left"> <h1>{this.state.timer}</h1> </div>
 
         <button id="start_stop" onClick={() => { this.handleClick("start-stop") }}> START / STOP</button> 
         <button id="reset" onClick={() => { this.handleClick("reset") }}>Reset</button>
-
+        <audio id="beep" preload="auto" ref={(audio) => {this.alarm = audio;}} src="./sounds/alarm.mp3"/>
       </div>
     );
   }
