@@ -1,5 +1,3 @@
-// ##NOTE## Calculator works, but does not pass test probably due to my use of eval() function.
-
 const root = ReactDOM.createRoot(
   document.getElementById('root')
 );
