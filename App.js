@@ -198,6 +198,7 @@ class ReactApp extends React.Component {
 
       case 'reset':
         this.resetTimer();
+        this.changeStopTime();
         break;
 
       case '+Time':
