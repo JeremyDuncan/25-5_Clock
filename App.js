@@ -71,7 +71,7 @@ class ReactApp extends React.Component {
     this.setState({min: this.state.min = parseInt(this.state.min)});
   }
   resetMinutes = () => {
-    this.setState({min: this.state.min = 25});
+    this.setState({min: this.state.min = this.state.sessionLength});
   }
   resetSeconds = () => {
     this.setState({sec: this.state.sec = "0" + 0});
@@ -110,6 +110,41 @@ class ReactApp extends React.Component {
     }
   }
   
+  //=====================Break & Session Functions ============================>
+  // Adds 1 minute to sessionLength state
+  addTime = () => {       
+    if(this.state.sessionLength < 60){
+      this.setState({sessionLength: this.state.sessionLength = this.state.sessionLength + 1}); 
+    }
+  }
+  // Subtracts 1 minute from sessionLength state
+  subtractTime = () => {  
+    if(this.state.sessionLength > 1) {
+      this.setState({sessionLength: this.state.sessionLength = this.state.sessionLength - 1});
+    }
+  }
+  // Sets initial timer to sessionLength state
+  setTimer = () => {  
+    this.setState({time: this.state.timer = this.state.sessionLength + ":00"})
+  }
+  // Sets min state to sessionLength
+  setMinutes = () => { 
+    this.setState({min: this.state.min = this.state.sessionLength})
+  }
+  // Add 1 minute to breakLength
+  addBreak = () => {
+    this.setState({breakLength: this.state.breakLength = this.state.breakLength + 1})
+  }
+  // Subtract 1 minute from breakLength
+  subtractBreak = () => {
+    this.setState({breakLength: this.state.breakLength = this.state.breakLength - 1})
+  }
+  //ADD FUNCTIONALITY TO THIS
+  setBreakTimer = () => { 
+    // do this ===>
+  }
+ 
+
   //================= handleClick() Function ==================================>
   handleClick = (button) => {
     switch (button) {
@@ -130,19 +165,25 @@ class ReactApp extends React.Component {
         break;
 
       case '+Time':
-        alert("Add Time") //ADD FUNCTIONALITY
+        this.addTime();
+        this.setTimer();
+        this.setMinutes(); 
         break;
 
       case "-Time":
-        alert("Subtract Time") //ADD FUNCTIONALITY
+        this.subtractTime();
+        this.setTimer(); 
+        this.setMinutes(); 
         break;
 
       case '+Break':
-        alert("Add Break") //ADD FUNCTIONALITY
+        this.addBreak(); 
+        //ADD FUNCTIONALITY<=========
         break;
 
       case "-Break":
-        alert("Subtract Break") //ADD FUNCTIONALITY
+        this.subtractBreak();
+        //ADD FUNCTIONALITY<==========
         break;
 
       default:
@@ -155,21 +196,28 @@ class ReactApp extends React.Component {
     // ==>
     // ==>
     return (
-      <div>
+      <div id="wrapper">
         <h1>25 + 5 Clock</h1>
-        <div id="break-label"> Break Length </div>
-        <div id="session-label"> Session Length </div>
-        <button id="break-decrement" onClick={() => { this.handleClick("-Break") }}>- Break Time</button> 
-        <button id="session-decrement" onClick={() => { this.handleClick("-Time") }}>- Time </button>
-        
+
+        <div id="break-label"> <h2>Break Length</h2> </div>
         <button id="break-increment" onClick={() => { this.handleClick("+Break") }}>+ Break Time</button>
+        <button id="break-decrement" onClick={() => { this.handleClick("-Break") }}>- Break Time</button> 
+        <div id="break-length"> <h3>{this.state.breakLength}</h3> </div>
+
+        <div id="session-label"> <h2>Session Length</h2> </div>
         <button id="session-increment" onClick={() => { this.handleClick("+Time") }}>+ Time</button>
-        
-        <div id="break-length"> {this.state.breakLength} </div>
-        <div id="session-length"> {this.state.sessionLength} </div>
+        <button id="session-decrement" onClick={() => { this.handleClick("-Time") }}>- Time </button>
+        <div id="session-length"> <h3>{this.state.sessionLength}</h3> </div>
+
        
-        <div id="timer-label"> Session </div>
-        <div id="time-left"> {this.state.timer} </div>
+        
+        
+        
+        
+        
+       
+        <div id="timer-label"> <h2>Session</h2> </div>
+        <div id="time-left"> <h1>{this.state.timer}</h1> </div>
 
         <button id="start_stop" onClick={() => { this.handleClick("start-stop") }}> START / STOP</button> 
         <button id="reset" onClick={() => { this.handleClick("reset") }}>Reset</button>
