@@ -202,14 +202,18 @@ class ReactApp extends React.Component {
 
       case '+Time':
         this.addTime();
-        this.setTimer();
-        this.setMinutes(); 
+        if(this.state.timeForBreak === false){
+          this.setTimer();
+          this.setMinutes(); 
+        }
         break;
 
       case "-Time":
         this.subtractTime();
-        this.setTimer(); 
-        this.setMinutes(); 
+        if(this.state.timeForBreak === false){
+          this.setTimer(); 
+          this.setMinutes(); 
+        }
         break;
 
       case '+Break':
