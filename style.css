@@ -24,7 +24,7 @@ body {
 }
 #wrapper {
   margin: auto;
-  margin-top: 50px;
+  margin-top: 20px;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -84,4 +84,10 @@ h2 {
   background-color: rgb(9, 42, 3);
   color: rgb(195, 237, 189);
   box-shadow: 1px 1px 1px 1px black;
+ }
+ .footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+
  }
